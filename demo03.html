@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var arrs = [
+        {"id": "1","name": "张三","value": "1245"},
+        {"id": "1","name": "张三","value": "1360"},
+        {"id": "2","name": "李四","value": "1120"},
+        {"id": "2","name": "李四","value": "1362"},
+        {"id": "2","name": "李四","value": "1008"},
+        {"id": "3","name": "王五","value": "1360"},
+        {"id": "4","name": "赵六","value": "1986"},
+        {"id": "4","name": "赵六","value": "1240"}
+    ];
+    function duplicate(arr) {
+        var map = {},
+            dest = [];
+        for (var i = 0; i < arr.length; i++) {
+            var ai = arr[i];
+            if (!map[ai.id]) {
+                dest.push({
+                    id: ai.id,
+                    name: ai.name,
+                    value: ai.value
+                });
+                map[ai.id] = ai;
+            } else {
+                for (var j = 0; j < dest.length; j++) {
+                    var dj = dest[j];
+                    if (dj.id == ai.id) {
+                        dj.value = (parseFloat(dj.value) + parseFloat(ai.value)).toString();
+                        break;
+                    }
+                }
+            }
+        };
+        return dest
+    }
+    console.log(this.duplicate(arrs));
+</script>
+
+</body>
+</html>

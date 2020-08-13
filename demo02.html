@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //可以将数组中元素(object)的某一个值(通常是具有归纳属性的)相同的，即同一类的元素合并，而数组元素中不需要合并的属性可以叠加
+    var list = [{
+        pid: 1,
+        num: 12,
+        numSaled: 4
+    }, {
+        pid: 2,
+        num: 32,
+        numSaled: 12
+    }, {
+        pid: 1,
+        num: 22,
+        numSaled: 5
+    }, {
+        pid: 2,
+        num: 33,
+        numSaled: 20
+    }]
+
+    var combineObjectInList=function (arr, item, list) {   //数组去除重复，item为重复判定项，list为重复记录需要累加的值的数组
+        var obj = {};
+        var a = [];
+        for(var i in arr) {
+            if(!obj[arr[i][item]]) {
+                obj[arr[i][item]] = copyObj(arr[i]);  //数组克隆
+            } else if(!!obj[arr[i][item]]) {
+                for(var j in list) {
+                    obj[arr[i][item]][list[j]] = obj[arr[i][item]][list[j]] + parseFloat(arr[i][list[j]]);
+                }
+            }
+        }
+        for(var k in obj) {
+            a.push(obj[k]);
+        }
+        return a;
+
+    }
+    var copyObj = function(obj) {          //obj arr 对象的克隆（区分于指针赋值）
+        if(obj.constructor == Array) {
+            var a = [];
+            for(var i in obj) {
+                a.push(obj[i]);
+            }
+            return a;
+        } else {
+            var o = {}
+            for(var i in obj) {
+                o[i] = obj[i];
+            }
+            return o;
+        }
+        console.log(o);
+        console.log(a);
+
+    }
+
+    var myProductList=combineObjectInList(list,"pid",["num","numSaled"]);
+    //console.log(this.duplicate(list,"pid",["num","numSaled"]));
+    console.log(myProductList)
+
+
+
+    //数组list 根据pid去重，（pid相同的记录合并，num,跟numSaled的值累加）/**/
+</script>
+</body>
+</html>
